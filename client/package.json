@@ -19,7 +19,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "react-stripe-checkout": "^2.6.3",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1"
@@ -37,7 +37,7 @@
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
     "parcel": "^2.0.0",
-    "parcel-bundler": "^1.12.5",
+    "parcel-bundler": "^1.9.4",
     "prettier": "^2.4.1",
     "sass": "^1.43.2"
   },

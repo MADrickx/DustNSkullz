@@ -182,6 +182,7 @@ const Cart = () => {
                 const res = await userRequest.post("/checkout/payment", {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100,
+                    payment_method_types: ["bancontact"],
                 });
                 navigate("/success", {data: res.data});
             } catch (err) {}
@@ -251,21 +252,25 @@ const Cart = () => {
                                 {"Estimate Shipping"}
                             </SummaryItemText>
                             <SummaryItemPrice>
-                                {cart.products ? 5 : 0}
+                                {cart.total !== 0 ? 5 + "€" : 0 + "€"}
                             </SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type={"total"}>
                             <SummaryItemText>{"Total"}</SummaryItemText>
                             <SummaryItemPrice>{`${
-                                cart.products ? 5 : 0
+                                cart.total !== 0 ? 5 + cart.total : 0
                             }€`}</SummaryItemPrice>
                         </SummaryItem>
                         <StripeCheckout
                             name="Dust-N-Skullz"
                             image="https://avatars.githubusercontent.com/u/43953529?v=4"
-                            billingAdress
-                            ShippingAdress
-                            description={`Your total is ${cart.total}€`}
+                            billingAddress
+                            shippingAddress
+                            currency="EUR"
+                            description={`Your total is ${
+                                cart.total !== 0 ? cart.total + 5 : cart.total
+                            }€`}
+                            locale="be"
                             amount={cart.total * 100}
                             token={onToken}
                             stripeKey={key}>
