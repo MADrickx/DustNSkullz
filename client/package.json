@@ -1,0 +1,68 @@
+{
+  "name": "new",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/material": "^5.0.4",
+    "@reduxjs/toolkit": "^1.6.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "4.0.3",
+    "react-stripe-checkout": "^2.6.3",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@becode/eslint-config": "^0.12.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-unicorn": "^37.0.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "parcel": "^2.0.0",
+    "parcel-bundler": "^1.12.5",
+    "prettier": "^2.4.1",
+    "sass": "^1.43.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
