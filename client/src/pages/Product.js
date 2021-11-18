@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Annoucement from "../components/Annoucement";
@@ -133,6 +133,7 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState(null);
     const [size, setSize] = useState(null);
+    const inputSize = useRef(null);
     const dispatch = useDispatch();
 
     const handleQuantity = (type) => {
@@ -148,16 +149,18 @@ const Product = () => {
             try {
                 const res = await publicRequest.get("/products/find/" + id);
                 setProduct(res.data);
-            } catch (err) {
-                console.log(err);
-            }
+            } catch (err) {}
         };
         getProduct();
     }, [id]);
 
     const handleClick = () => {
-        //updateCart
-        dispatch(addProduct({...product, quantity, color, size}));
+        if (inputSize.current.value !== "Size") {
+            inputSize.current.style.border = "1px solid green";
+            dispatch(addProduct({...product, quantity, color, size}));
+        } else {
+            inputSize.current.style.border = "1px solid red";
+        }
     };
     return (
         <Container>
@@ -185,7 +188,11 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>{"Size"}</FilterTitle>
                             <FilterSizes
+                                ref={inputSize}
                                 onChange={(e) => setSize(e.target.value)}>
+                                <FilterSizeOption disabled>
+                                    {"Size"}
+                                </FilterSizeOption>
                                 {product.size?.map((s) => (
                                     <FilterSizeOption key={s}>
                                         {s}

@@ -24,7 +24,7 @@ const Left = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 `;
 
 const Language = styled.span`
@@ -81,6 +81,19 @@ const MenuItem = styled.div`
     ${mobile({fontSize: "12px", paddingRight: "0.5rem"})};
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        color: black;
+    }
+`;
+
 const Navbar = () => {
     const quantity = useSelector((state) => state.cart.quantity);
     return (
@@ -94,18 +107,24 @@ const Navbar = () => {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>{"DustNskullz"}</Logo>
+                    <StyledLink to="/">
+                        <Logo>{"DustNskullz"}</Logo>
+                    </StyledLink>
                 </Center>
                 <Right>
-                    <MenuItem>{"REGISTER"}</MenuItem>
-                    <MenuItem>{"SIGN IN"}</MenuItem>
-                    <Link to={"/cart"}>
+                    <StyledLink to={"/register"}>
+                        <MenuItem>{"REGISTER"}</MenuItem>
+                    </StyledLink>
+                    <StyledLink to={"/login"}>
+                        <MenuItem>{"LOG IN"}</MenuItem>
+                    </StyledLink>
+                    <StyledLink to={"/cart"}>
                         <MenuItem>
                             <Badge badgeContent={quantity} color={"primary"}>
                                 <ShoppingCartOutlined color={"action"} />
                             </Badge>
                         </MenuItem>
-                    </Link>
+                    </StyledLink>
                 </Right>
             </Wrapper>
         </Container>

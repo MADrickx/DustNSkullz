@@ -11,15 +11,17 @@ import {
     Payment,
 } from "@material-ui/icons";
 import {mobile} from "../responsive";
-
+import {Link} from "react-router-dom";
 const Container = styled.div`
     display: flex;
+    justify-content: space-between;
     ${mobile({flexDirection: "column"})};
 `;
 
 const Left = styled.div`
     flex: 1;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     padding: 1rem;
 `;
@@ -27,30 +29,33 @@ const Left = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 1rem;
+    justify-content: center;
     ${mobile({display: "none"})};
 `;
 
 const Right = styled.div`
     flex: 1;
     padding: 1rem;
+    justify-content: center;
     ${mobile({backgroundColor: "lightgrey"})};
 `;
 
 const Title = styled.h3`
     margin-bottom: 2rem;
+    text-align: center;
 `;
 
 const List = styled.ul`
     margin: 0;
     padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    columns: 2;
+    list-style-type: none;
+    text-align: center;
 `;
 
 const ListItem = styled.li`
-    width: 30%;
-    margin: 0.5rem;
+    margin: 0 0 0.5rem 0;
+    padding: 0;
 `;
 
 const Logo = styled.h1`
@@ -68,7 +73,7 @@ const SocialIcons = styled.div`
     height: 2rem;
     border-radius: 50%;
     color: white;
-    background-color: #${props => props.color};
+    background-color: #${(props) => props.color};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,12 +81,9 @@ const SocialIcons = styled.div`
 `;
 
 const ContactItem = styled.div`
+    width: 50%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    & > * {
-        margin-right: 1rem;
-    }
+    margin: 0 0.5rem 0.5rem 0.5rem;
     & > svg {
         width: 1rem;
         height: 1rem;
@@ -92,16 +94,39 @@ const PaymentContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 50%;
 `;
 
 const PaymentItem = styled.div`
-    margin: 0.5rem 0.5rem 0 0;
+    margin: 1rem 1rem 0 0;
+`;
+
+const ContactContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        color: black;
+    }
 `;
 
 const Footer = () => (
     <Container>
         <Left>
-            <Logo>{"DustNskullZ"}</Logo>
+            <StyledLink to="/">
+                <Logo>{"DustNskullZ"}</Logo>
+            </StyledLink>
             <Description>
                 {
                     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda itaque animi qui quas mollitia corporis quaerat quam. Eaque, culpa repellat."
@@ -137,32 +162,34 @@ const Footer = () => (
         </Center>
         <Right>
             <Title>{"Contact"}</Title>
-            <ContactItem>
-                <Map />
-                {"Adresse"}
-            </ContactItem>
-            <ContactItem>
-                <PhoneIphone />
-                {"Phone"}
-            </ContactItem>
-            <ContactItem>
-                <AlternateEmail />
-                {"MailAdresse"}
-            </ContactItem>
-            <PaymentContainer>
-                <PaymentItem>
-                    <Payment />
-                </PaymentItem>
-                <PaymentItem>
-                    <Payment />
-                </PaymentItem>
-                <PaymentItem>
-                    <Payment />
-                </PaymentItem>
-                <PaymentItem>
-                    <Payment />
-                </PaymentItem>
-            </PaymentContainer>
+            <ContactContainer>
+                <ContactItem>
+                    <Map />
+                    {"Adresse"}
+                </ContactItem>
+                <ContactItem>
+                    <PhoneIphone />
+                    {"Phone"}
+                </ContactItem>
+                <ContactItem>
+                    <AlternateEmail />
+                    {"MailAdresse"}
+                </ContactItem>
+                <PaymentContainer>
+                    <PaymentItem>
+                        <Payment />
+                    </PaymentItem>
+                    <PaymentItem>
+                        <Payment />
+                    </PaymentItem>
+                    <PaymentItem>
+                        <Payment />
+                    </PaymentItem>
+                    <PaymentItem>
+                        <Payment />
+                    </PaymentItem>
+                </PaymentContainer>
+            </ContactContainer>
         </Right>
     </Container>
 );

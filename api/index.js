@@ -9,6 +9,9 @@ const orderRoute = require('./routes/order');
 const cartRoute = require('./routes/cart');
 const stripeRoute = require('./routes/stripe');
 const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
+const path = require("path");
 dotenv.config();
 
 mongoose.connect(
@@ -16,10 +19,13 @@ mongoose.connect(
     )
     .then(()=> console.log("Connexion succesfull"))
     .catch((err)=>console.log(err)
-    );
+);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:'*'
+}));
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
@@ -27,7 +33,12 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 
+const port = process.env.PORT || 5000;
 
-app.listen(process.env.PORT || 5000, ()=>{
-    console.log('backend server is running')
-});
+const options = {
+    key: fs.readFileSync("../cert/server.key"),
+    cert: fs.readFileSync("../cert/server.crt"),
+};
+
+
+https.createServer(options, app).listen(port);

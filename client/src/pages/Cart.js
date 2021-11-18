@@ -9,7 +9,7 @@ import {mobile} from "../responsive";
 import {useSelector} from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import {userRequest} from "../requestMethods";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 
 const key = process.env.REACT_APP_STRIPE_PUB_SEC;
 
@@ -182,7 +182,6 @@ const Cart = () => {
                 const res = await userRequest.post("/checkout/payment", {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100,
-                    payment_method_types: ["bancontact"],
                 });
                 navigate("/success", {data: res.data});
             } catch (err) {}
@@ -196,12 +195,28 @@ const Cart = () => {
             <Wrapper>
                 <Title>{"Your Cart"}</Title>
                 <Top>
-                    <TopButton>{"Continue Shopping"}</TopButton>
+                    <Link to="/products">
+                        <TopButton>{"Continue Shopping"}</TopButton>
+                    </Link>
                     <TopTexts>
                         <TopText>{"Shopping Bag (2)"}</TopText>
                         <TopText>{"Your Wishlist"}</TopText>
                     </TopTexts>
-                    <TopButton type={"filled"}>{"Checkout now"}</TopButton>
+                    <StripeCheckout
+                        name="Dust-N-Skullz"
+                        image="https://avatars.githubusercontent.com/u/43953529?v=4"
+                        billingAddress
+                        shippingAddress
+                        currency="EUR"
+                        description={`Your total is ${
+                            cart.total !== 0 ? cart.total + 5 : cart.total
+                        }€`}
+                        locale="fr"
+                        amount={cart.total * 100}
+                        token={onToken}
+                        stripeKey={key}>
+                        <SummaryButton>CHECKOUT NOW</SummaryButton>
+                    </StripeCheckout>
                 </Top>
                 <Bottom>
                     <Info>
@@ -218,10 +233,16 @@ const Cart = () => {
                                             <b>{"ID :"}</b>
                                             {product._id}
                                         </ProductID>
-                                        <ProductColor color={product.color} />
+                                        <ProductColor
+                                            color={
+                                                product.color
+                                                    ? product.color
+                                                    : "black"
+                                            }
+                                        />
                                         <ProductSize>
                                             <b>{"Size :"}</b>
-                                            {product.size}
+                                            {product.size ? product.size : " L"}
                                         </ProductSize>
                                     </Details>
                                 </ProductDetail>
@@ -270,7 +291,7 @@ const Cart = () => {
                             description={`Your total is ${
                                 cart.total !== 0 ? cart.total + 5 : cart.total
                             }€`}
-                            locale="be"
+                            locale="fr"
                             amount={cart.total * 100}
                             token={onToken}
                             stripeKey={key}>

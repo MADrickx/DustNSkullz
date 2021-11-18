@@ -19,8 +19,8 @@ const Products = ({author, filters, sort}) => {
             try {
                 const res = await axios.get(
                     author
-                        ? `http://localhost:5000/api/products?author=${author}`
-                        : "http://localhost:5000/api/products",
+                        ? `https://localhost:5000/api/products?author=${author}`
+                        : "https://localhost:5000/api/products",
                 );
                 setProducts(res.data);
             } catch (err) {}

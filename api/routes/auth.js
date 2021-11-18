@@ -23,7 +23,7 @@ router.post("/register", async (req,res)=>{
 router.post("/login", async (req, res)=>{
     try{
         const user = await User.findOne({ username:req.body.username });
-        !user && res.status(401).json("Wrong credentials"); //(if user is different from any user inside the DB then return error 401 with a message "wrong credentials")
+        !user && res.status(401).json("Wrong Username"); //(if user is different from any user inside the DB then return error 401 with a message "wrong credentials")
 
         const hashedPSW = CryptoJS.AES.decrypt(
             user.password, 
@@ -41,10 +41,12 @@ router.post("/login", async (req, res)=>{
             {expiresIn:'3d'}
         );
 
-        //return the user object with it's all its info but the password
+        //return the user object with all its info but the password
         const { password, ...others } = user._doc;
 
         res.status(200).json({...others, accessToken});
+        req.header("Access-Control-Allow-Origin", "*");
+        req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     } catch(err) {
         res.status(500).json(err);
     }

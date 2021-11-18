@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
+import {Link} from "react-router-dom";
+import {login} from "../redux/apiCalls";
+import {useDispatch} from "react-redux";
 
 const Container = styled.div`
     width: 100vw;
@@ -39,28 +42,45 @@ const Button = styled.button`
     padding: 1rem 0;
     border-radius: 5px;
     margin: 1rem 0 1rem 0;
+    cursor: pointer;
 `;
 
-const Link = styled.a`
+const StyledLink = styled(Link)`
     margin: 0.5rem 0;
     font-size: 12px;
     text-decoration: underline;
     cursor: pointer;
 `;
 
-const Login = () => (
-    <Container>
-        <Wrapper>
-            <Title>{"Sign in"}</Title>
-            <Form>
-                <Input placeholder={"Username"} />
-                <Input placeholder={"Password"} />
-                <Button>{"LOGIN"}</Button>
-                <Link>{"FORGOT PASSWORD?"}</Link>
-                <Link>{"CREATE ACCOUNT !"}</Link>
-            </Form>
-        </Wrapper>
-    </Container>
-);
+const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const handleClick = (e) => {
+        e.preventDefault();
+        login(dispatch, {username, password});
+    };
+    return (
+        <Container>
+            <Wrapper>
+                <Title>{"Sign in"}</Title>
+                <Form>
+                    <Input
+                        placeholder={"Username"}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <Input
+                        placeholder={"Password"}
+                        type="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button onClick={handleClick}>{"LOGIN"}</Button>
+                    <StyledLink to="/forgot">{"FORGOT PASSWORD?"}</StyledLink>
+                    <StyledLink to="/register">{"CREATE ACCOUNT !"}</StyledLink>
+                </Form>
+            </Wrapper>
+        </Container>
+    );
+};
 
 export default Login;
