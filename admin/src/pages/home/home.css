@@ -1,0 +1,15 @@
+.home{
+display: flex;
+flex-direction: column;
+width: 90%;
+}
+
+.homeWidgets{
+    display: flex;
+    margin: 20px;
+}
+
+.containerHome{
+    display: flex;
+    flex-direction: row;
+}
