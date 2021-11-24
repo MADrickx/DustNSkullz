@@ -96,6 +96,11 @@ const StyledLink = styled(Link)`
 
 const Navbar = () => {
     const quantity = useSelector((state) => state.cart.quantity);
+    const user = useSelector((state) => state.user.currentUser);
+
+    const handleLogOut = () => {
+        user.accessToken = null;
+    };
     return (
         <Container>
             <Wrapper>
@@ -112,12 +117,24 @@ const Navbar = () => {
                     </StyledLink>
                 </Center>
                 <Right>
-                    <StyledLink to={"/register"}>
-                        <MenuItem>{"REGISTER"}</MenuItem>
-                    </StyledLink>
-                    <StyledLink to={"/login"}>
-                        <MenuItem>{"LOG IN"}</MenuItem>
-                    </StyledLink>
+                    {user ? (
+                        ""
+                    ) : (
+                        <StyledLink to={"/register"}>
+                            <MenuItem>{"REGISTER"}</MenuItem>
+                        </StyledLink>
+                    )}
+                    {user ? (
+                        <StyledLink to={"/"}>
+                            <MenuItem onClick={handleLogOut}>
+                                {"LOG OUT"}
+                            </MenuItem>
+                        </StyledLink>
+                    ) : (
+                        <StyledLink to={"/login"}>
+                            <MenuItem>{"LOG IN"}</MenuItem>
+                        </StyledLink>
+                    )}
                     <StyledLink to={"/cart"}>
                         <MenuItem>
                             <Badge badgeContent={quantity} color={"primary"}>
