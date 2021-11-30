@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/home/Home";
-import {HashRouter as Router, Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -10,19 +10,43 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 
 function App() {
+    const admin = localStorage.getItem("persist:root")
+        ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+              .currentUser.isAdmin
+        : "";
     return (
-        <Router>
-            <Routes>
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/" element={<Home />} />
-                <Route path="/users" element={<UserList />} />
-                <Route path="/user/:userId" element={<User />} />
-                <Route path="/newUser" element={<NewUser />} />
-                <Route path="/products" element={<ProductList />} />
-                <Route path="/product/:productId" element={<Product />} />
-                <Route path="/newproduct" element={<NewProduct />} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route
+                exact
+                path="/"
+                element={!admin ? <Navigate to="/login" /> : <Home />}
+            />
+            <Route
+                path="/users"
+                element={!admin ? <Navigate to="/login" /> : <UserList />}
+            />
+            <Route
+                path="/user/:userId"
+                element={!admin ? <Navigate to="/login" /> : <User />}
+            />
+            <Route
+                path="/newUser"
+                element={!admin ? <Navigate to="/login" /> : <NewUser />}
+            />
+            <Route
+                path="/products"
+                element={!admin ? <Navigate to="/login" /> : <ProductList />}
+            />
+            <Route
+                path="/product/:productId"
+                element={!admin ? <Navigate to="/login" /> : <Product />}
+            />
+            <Route
+                path="/newproduct"
+                element={!admin ? <Navigate to="/login" /> : <NewProduct />}
+            />
+        </Routes>
     );
 }
 

@@ -1,5 +1,4 @@
 {
-  "homepage": ".",
   "name": "dnsadmin",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +19,7 @@
     "recharts": "^2.0.9",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.3",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {

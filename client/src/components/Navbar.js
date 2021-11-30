@@ -5,7 +5,9 @@ import Badge from "@mui/material/Badge";
 import {ShoppingCartOutlined} from "@material-ui/icons";
 import {mobile} from "../responsive";
 import {useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {logout} from "../redux/apiCalls";
+import {useDispatch} from "react-redux";
 const Container = styled.div`
     height: 60px;
     padding: 1rem 0;
@@ -96,10 +98,12 @@ const StyledLink = styled(Link)`
 
 const Navbar = () => {
     const quantity = useSelector((state) => state.cart.quantity);
-    const user = useSelector((state) => state.user.currentUser);
-
+    let user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleLogOut = () => {
-        user.accessToken = null;
+        logout(dispatch, logout);
+        navigate("/");
     };
     return (
         <Container>

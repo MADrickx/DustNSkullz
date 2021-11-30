@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {login} from "../../redux/apiCalls";
 import {useDispatch} from "react-redux";
 import {mobile} from "../../responsive";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
     width: 100vw;
@@ -42,7 +43,7 @@ const Button = styled.button`
     border-radius: 5px;
     margin: 1rem 0 1rem 0;
     cursor: pointer;
-    &::disabled {
+    &:disabled {
         cursor: not-allowed;
     }
 `;
@@ -51,11 +52,18 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleClick = (e) => {
         e.preventDefault();
         login(dispatch, {username, password});
+
+        const timer = setTimeout(() => {
+            navigate("/");
+        }, 1000);
+        return () => clearTimeout(timer);
     };
+
     return (
         <div>
             <Container>

@@ -5,7 +5,12 @@ import Login from "./pages/Login";
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
 import Register from "./pages/Register";
-import {HashRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 const App = () => {

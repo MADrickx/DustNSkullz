@@ -49,8 +49,6 @@ const Register = () => (
         <Wrapper>
             <Title>{"Create an Account"}</Title>
             <Form>
-                <Input placeholder={"Name"} />
-                <Input placeholder={"Last Name"} />
                 <Input placeholder={"Username"} />
                 <Input placeholder={"eMail"} />
                 <Input placeholder={"Password"} />

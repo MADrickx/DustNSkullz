@@ -1,13 +1,48 @@
 import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
-import {userData} from "../../dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
+import {useState, useMemo, useEffect} from "react";
+import {userRequest} from "../../requestMethods";
 
 export default function Home() {
+    const [userStats, setUserStats] = useState([]);
+    const MONTHS = useMemo(
+        () => [
+            "JAN",
+            "FEV",
+            "MAR",
+            "AVR",
+            "MAI",
+            "JUI",
+            "JLT",
+            "AOU",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DEC",
+        ],
+        [],
+    );
+
+    useEffect(() => {
+        const getStats = async () => {
+            try {
+                const res = await userRequest.get("/users/stats");
+                res.data.map((item) =>
+                    setUserStats((prev) => [
+                        ...prev,
+                        {name: MONTHS[item._id - 1], "Active User": item.total},
+                    ]),
+                );
+            } catch (err) {}
+        };
+        getStats();
+    }, [MONTHS]);
+
     return (
         <div className="containerLam">
             <Topbar />
@@ -16,7 +51,7 @@ export default function Home() {
                 <div className="home">
                     <FeaturedInfo />
                     <Chart
-                        data={userData}
+                        data={userStats}
                         title="User Analytics"
                         grid
                         dataKey="Active User"

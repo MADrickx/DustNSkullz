@@ -27,9 +27,6 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
     width: 100%;
-    height: 80vh;
-    object-fit: cover;
-    ${mobile({height: "40vh"})};
 `;
 
 const InfoContainer = styled.div`
@@ -168,7 +165,7 @@ const Product = () => {
             <Annoucement />
             <Wrapper>
                 <ImageContainer>
-                    <Image src={product.img} />
+                    <Image src={`data:image/jpg;base64,${product.img}`} />
                 </ImageContainer>
                 <InfoContainer>
                     <Title>{product.title}</Title>
