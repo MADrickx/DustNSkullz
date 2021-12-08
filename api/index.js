@@ -2,16 +2,17 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require('cors');
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
 const orderRoute = require('./routes/order');
 const cartRoute = require('./routes/cart');
 const stripeRoute = require('./routes/stripe');
-const cors = require('cors');
 const https = require('https');
 const fs = require('fs');
 const path = require("path");
+const referrerPolicy = require('referrer-policy')
 dotenv.config();
 
 mongoose.connect(
@@ -22,15 +23,12 @@ mongoose.connect(
 );
 
 app.use(express.json({ limit: '200mb' }));
-app.use(cors());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
+app.use(referrerPolicy())
+
+app.use(cors({
+    origin: "*",
+}));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
@@ -45,6 +43,5 @@ const options = {
     key: fs.readFileSync("../cert/server.key"),
     cert: fs.readFileSync("../cert/server.crt"),
 };
-
 
 https.createServer(options, app).listen(port);

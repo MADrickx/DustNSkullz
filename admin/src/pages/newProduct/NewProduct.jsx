@@ -30,7 +30,6 @@ export default function NewProduct() {
     const modalRef = useRef(null);
 
     const product = useSelector((state) => state.product);
-    console.log(product);
     const handleImg = (e) => {
         let file = e.target.files[0];
         let reader = new FileReader();
@@ -51,6 +50,8 @@ export default function NewProduct() {
         if (product.message) {
             if (product.error) {
                 modalRef.current.style.background = "rgba(255, 0, 51, 0.25)";
+            } else {
+                modalRef.current.style.background = "rgba(50, 205, 50, 0.25);";
             }
             modalRef.current.style.opacity = 1;
         }

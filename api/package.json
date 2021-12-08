@@ -17,6 +17,7 @@
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
+    "referrer-policy": "^1.2.0",
     "stripe": "^8.188.0"
   },
   "scripts": {

@@ -34,20 +34,23 @@ export default function Product() {
     };
 
     const handleChange = (e) => {
-        setInputs((prev) => {
-            return {...prev, [e.target.name]: e.target.value};
+        setInputs(() => {
+            return {[e.target.name]: e.target.value};
         });
+        console.log(inputs);
     };
 
     const handleClick = (e) => {
         e.preventDefault();
         const newProduct = {
-            _id: productId,
-            ...inputs,
+            title: inputs.title,
+            desc: inputs.desc,
+            inStock: inputs.inStock,
+            price: inputs.price,
+            author: inputs.author,
             img: newImg ? newImg : product.img,
         };
         updateProduct(productId, newProduct, dispatch);
-        console.log(newProduct);
     };
 
     const MONTHS = useMemo(
@@ -112,19 +115,19 @@ export default function Product() {
                         <div className="productTopRight">
                             <div className="productInfoTop">
                                 <img
-                                    src={`data:image/png;base64,${product.img}`}
+                                    src={`data:image/png;base64,${product?.img}`}
                                     alt=""
                                     className="productInfoImg"
                                 />
                                 <span className="productName">
-                                    {product.title}
+                                    {product?.title}
                                 </span>
                             </div>
                             <div className="productInfoBottom">
                                 <div className="productInfoItem">
                                     <span className="productInfoKey">id:</span>
                                     <span className="productInfoValue">
-                                        {product._id}
+                                        {product?._id}
                                     </span>
                                 </div>
                                 <div className="productInfoItem">
@@ -132,7 +135,7 @@ export default function Product() {
                                         price:
                                     </span>
                                     <span className="productInfoValue">
-                                        {product.price}€
+                                        {product?.price}€
                                     </span>
                                 </div>
                                 <div className="productInfoItem">
@@ -140,7 +143,7 @@ export default function Product() {
                                         in stock:
                                     </span>
                                     <span className="productInfoValue">
-                                        {product.inStock}
+                                        {product?.inStock}
                                     </span>
                                 </div>
                             </div>
@@ -152,21 +155,21 @@ export default function Product() {
                                 <label>Product Name</label>
                                 <input
                                     type="text"
-                                    placeholder={product.title}
+                                    placeholder={product?.title}
                                     onChange={handleChange}
                                     name="title"
                                 />
                                 <label>Product Description</label>
                                 <input
                                     type="text"
-                                    placeholder={product.desc}
+                                    placeholder={product?.desc}
                                     onChange={handleChange}
                                     name="desc"
                                 />
                                 <label>Product Price</label>
                                 <input
                                     type="number"
-                                    placeholder={product.price}
+                                    placeholder={product?.price}
                                     onChange={handleChange}
                                     name="price"
                                 />
@@ -215,7 +218,7 @@ export default function Product() {
                                         src={
                                             newImg
                                                 ? `data:image/png;base64,${newImg}`
-                                                : `data:image/png;base64,${product.img}`
+                                                : `data:image/png;base64,${product?.img}`
                                         }
                                         alt=""
                                         className="productUploadImg"

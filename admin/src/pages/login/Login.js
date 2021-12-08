@@ -58,10 +58,9 @@ const Login = () => {
         e.preventDefault();
         login(dispatch, {username, password});
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             navigate("/");
-        }, 1000);
-        return () => clearTimeout(timer);
+        }, 2000);
     };
 
     return (
