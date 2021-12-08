@@ -16,16 +16,14 @@ router.post("/", verifyTokenAndAdmin, async (req,res)=>{
 
 //update
 router.put('/:id',verifyTokenAndAdmin, async (req,res)=>{
+    console.log(req.headers);
    try{
-       const updatedProduct = await Product.findByIdAndUpdate(req.params.id, 
-        {
-           $set:req.body
-        },
-        {
-           new:true
-        },
+       const updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, 
+        {product:req.body},
     );
+    console.log(req.body);
     res.status(200).json(updatedProduct);
+    
    } catch(err) {
     res.status(500).json(err);
    }

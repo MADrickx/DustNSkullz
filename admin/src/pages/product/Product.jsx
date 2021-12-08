@@ -5,23 +5,31 @@ import {Publish} from "@material-ui/icons";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import {useLocation} from "react-router";
-import {useSelector} from "react-redux";
 import {updateProduct} from "../../redux/apiCalls";
 import {useEffect, useMemo, useState} from "react";
 import {userRequest} from "../../requestMethods";
 import {useDispatch} from "react-redux";
-
+import {publicRequest} from "../../requestMethods";
 export default function Product() {
     const location = useLocation();
     const productId = location.pathname.split("/")[2];
     const [pStats, setPStats] = useState([]);
     const [newImg, setNewImg] = useState();
     const [inputs, setInputs] = useState({});
+    const [product, setProduct] = useState({});
     const dispatch = useDispatch();
 
-    const product = useSelector((state) =>
-        state.product.products.find((product) => product._id === productId),
-    );
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicRequest.get(
+                    "/products/find/" + productId,
+                );
+                setProduct(res.data);
+            } catch (err) {}
+        };
+        getProduct();
+    }, [productId]);
 
     const handleImg = (e) => {
         let file = e.target.files[0];
@@ -34,8 +42,8 @@ export default function Product() {
     };
 
     const handleChange = (e) => {
-        setInputs(() => {
-            return {[e.target.name]: e.target.value};
+        setInputs((prev) => {
+            return {...prev, [e.target.name]: e.target.value};
         });
         console.log(inputs);
     };
