@@ -22,9 +22,9 @@ mongoose.connect(
     .catch((err)=>console.log(err)
 );
 
-app.use(express.json({ limit: '200mb' }));
-
-app.use(referrerPolicy())
+app.use(express.json({ limit: '500mb' }));
+// app.use(express.urlencoded({ extended: false }))
+// app.use(referrerPolicy())
 
 app.use(cors({
     origin: "*",

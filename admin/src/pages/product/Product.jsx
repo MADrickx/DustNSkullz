@@ -10,6 +10,7 @@ import {useEffect, useMemo, useState} from "react";
 import {userRequest} from "../../requestMethods";
 import {useDispatch} from "react-redux";
 import {publicRequest} from "../../requestMethods";
+import {useSelector} from "react-redux";
 export default function Product() {
     const location = useLocation();
     const productId = location.pathname.split("/")[2];
@@ -18,48 +19,6 @@ export default function Product() {
     const [inputs, setInputs] = useState({});
     const [product, setProduct] = useState({});
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        const getProduct = async () => {
-            try {
-                const res = await publicRequest.get(
-                    "/products/find/" + productId,
-                );
-                setProduct(res.data);
-            } catch (err) {}
-        };
-        getProduct();
-    }, [productId]);
-
-    const handleImg = (e) => {
-        let file = e.target.files[0];
-        let reader = new FileReader();
-
-        reader.onloadend = function () {
-            setNewImg(reader.result.split(",")[1]);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const handleChange = (e) => {
-        setInputs((prev) => {
-            return {...prev, [e.target.name]: e.target.value};
-        });
-        console.log(inputs);
-    };
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        const newProduct = {
-            title: inputs.title,
-            desc: inputs.desc,
-            inStock: inputs.inStock,
-            price: inputs.price,
-            author: inputs.author,
-            img: newImg ? newImg : product.img,
-        };
-        updateProduct(productId, newProduct, dispatch);
-    };
 
     const MONTHS = useMemo(
         () => [
@@ -99,6 +58,49 @@ export default function Product() {
         getStats();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [MONTHS]);
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicRequest.get(
+                    "/products/find/" + productId,
+                );
+                setProduct(res.data);
+            } catch (err) {}
+        };
+        getProduct();
+    }, [productId]);
+
+    const handleImg = (e) => {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function () {
+            setNewImg(reader.result.split(",")[1]);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleChange = (e) => {
+        setInputs((prev) => {
+            return {...prev, [e.target.name]: e.target.value};
+        });
+        console.log(inputs);
+    };
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        const newProduct = {
+            _id: productId,
+            title: inputs?.title,
+            desc: inputs?.desc,
+            inStock: inputs?.inStock,
+            price: inputs?.price,
+            author: inputs?.author,
+            img: newImg ? newImg : "",
+        };
+        updateProduct(productId, newProduct, dispatch);
+    };
 
     return (
         <>

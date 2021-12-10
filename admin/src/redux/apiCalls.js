@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {publicRequest, userRequest} from "../requestMethods";
+import {publicRequest, putRequest, userRequest} from "../requestMethods";
 import {
     getProductFailure,
     getProductStart,
@@ -50,7 +50,7 @@ export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductStart());
     try {
         const res = await userRequest.put(`/products/${id}`);
-        dispatch(updateProductSuccess({id: id, product}));
+        dispatch(updateProductSuccess({id, product}));
     } catch (error) {
         dispatch(updateProductFailure());
     }

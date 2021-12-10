@@ -7,6 +7,7 @@ router.post("/", verifyTokenAndAdmin, async (req,res)=>{
     const newProduct = new Product(req.body)
 
     try{
+        console.log(req.body)
         const savedProduct = await newProduct.save();
         res.status(200).json(savedProduct);
     }catch(err){
@@ -16,12 +17,15 @@ router.post("/", verifyTokenAndAdmin, async (req,res)=>{
 
 //update
 router.put('/:id',verifyTokenAndAdmin, async (req,res)=>{
-    console.log(req.headers);
    try{
-       const updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, 
-        {product:req.body},
-    );
-    console.log(req.body);
+    const updatedProduct = await Product.findByIdAndUpdate({_id:req.params.id}, 
+        {
+           $set:req.body
+        },
+        {
+           new:true
+        });
+        console.log(req.body)
     res.status(200).json(updatedProduct);
     
    } catch(err) {

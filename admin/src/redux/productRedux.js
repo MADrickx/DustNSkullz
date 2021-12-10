@@ -31,7 +31,9 @@ const productSlice = createSlice({
         deleteProductSuccess: (state, action) => {
             state.isFetching = false;
             state.products.splice(
-                state.products.findIndex((item) => item._id === action.payload),
+                state.products.findIndex(
+                    (item) => item._id === action.payload.id,
+                ),
                 1,
             );
         },
@@ -46,7 +48,11 @@ const productSlice = createSlice({
         },
         updateProductSuccess: (state, action) => {
             state.isFetching = false;
-            state.products = action.payload;
+            state.products[
+                state.products.findIndex(
+                    (item) => item._id === action.payload.id,
+                )
+            ] = action.payload.product;
         },
         updateProductFailure: (state) => {
             state.isFetching = false;
