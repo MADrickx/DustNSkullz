@@ -20,6 +20,10 @@ export default function Product() {
     const [product, setProduct] = useState({});
     const dispatch = useDispatch();
 
+    const oldProduct = useSelector((state) =>
+        state.product.products.find((product) => product._id === productId),
+    );
+
     const MONTHS = useMemo(
         () => [
             "JAN",
@@ -99,7 +103,7 @@ export default function Product() {
             author: inputs?.author,
             img: newImg ? newImg : "",
         };
-        updateProduct(productId, newProduct, dispatch);
+        updateProduct(productId, {...oldProduct, ...newProduct}, dispatch);
     };
 
     return (
