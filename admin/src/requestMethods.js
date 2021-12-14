@@ -18,13 +18,3 @@ export const userRequest = axios.create({
         token: `Bearer ${TOKEN}`,
     },
 });
-
-export const putRequest = (url, product) =>
-    axios.put({
-        url,
-        product,
-        headers: {
-            ContentType: "application/json",
-            token: `Bearer ${TOKEN}`,
-        },
-    });

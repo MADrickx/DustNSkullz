@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {publicRequest, putRequest, userRequest} from "../requestMethods";
+import {publicRequest, userRequest} from "../requestMethods";
 import {
     getProductFailure,
     getProductStart,
