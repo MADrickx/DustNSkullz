@@ -5,7 +5,6 @@ const {verifyTokenAndAuthorized, verifyTokenAndAdmin} = require("./verifyToken")
 //create 
 router.post("/", verifyTokenAndAdmin, async (req,res)=>{
     const newProduct = new Product(req.body)
-
     try{
         console.log(req.body)
         const savedProduct = await newProduct.save();
@@ -16,15 +15,13 @@ router.post("/", verifyTokenAndAdmin, async (req,res)=>{
 })
 
 //update
-router.put('/:id',verifyTokenAndAdmin, async (req,res)=>{
-    console.log(req.body)
+router.put("/:id", verifyTokenAndAdmin, async (req,res)=>{
    try{
+    const {title,desc,img,categories,size,color,price,author,inStock} = req.body;
+    
     const updatedProduct = await Product.findByIdAndUpdate({_id:req.params.id}, 
         {
-           $set:req.body
-        },
-        {
-           new:true
+            title,desc,img,categories,size,color,price,author,inStock
         });
         console.log(req.body)
     res.status(200).json(updatedProduct);

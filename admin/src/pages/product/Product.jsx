@@ -101,11 +101,10 @@ export default function Product() {
             inStock: inputs?.inStock,
             price: inputs?.price,
             author: inputs?.author,
-            img: newImg ? newImg : "",
+            img: newImg ? newImg : undefined,
         };
         updateProduct(productId, {...oldProduct, ...newProduct}, dispatch);
     };
-
     return (
         <>
             <Topbar />
