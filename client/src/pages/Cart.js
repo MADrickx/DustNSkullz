@@ -13,7 +13,10 @@ import {useNavigate, Link} from "react-router-dom";
 
 const key = process.env.REACT_APP_STRIPE_PUB_SEC;
 
-const Container = styled.div``;
+const Container = styled.div`
+    background-color: #1f1f1f;
+    color: white;
+`;
 
 const Wrapper = styled.div`
     padding: 1rem;
@@ -29,27 +32,15 @@ const Top = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 0;
 `;
 
 const TopButton = styled.button`
     padding: 1rem;
     font-weight: 600;
     cursor: pointer;
-    border: ${(props) => props.type === "filled" && "none"};
-    background-color: ${(props) =>
-        props.type === "filled" ? "black" : "transparent"};
-    color: ${(props) => props.type === "filled" && "white"};
-`;
-
-const TopTexts = styled.div`
-    ${mobile({display: "none"})};
-`;
-
-const TopText = styled.span`
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 0 1rem;
+    border-radius: 5px;
+    border: none;
 `;
 
 const Bottom = styled.div`
@@ -65,8 +56,12 @@ const Info = styled.div`
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    border-bottom: 1px solid grey;
+    padding: 1rem 0;
     ${mobile({flexDirection: "column"})};
+    &:last-of-type {
+        border: none;
+    }
 `;
 
 const ProductDetail = styled.div`
@@ -77,6 +72,7 @@ const ProductDetail = styled.div`
 const Image = styled.img`
     width: 200px;
     display: block;
+    border-radius: 5px;
 `;
 
 const Details = styled.div`
@@ -130,12 +126,6 @@ const ProductPrice = styled.div`
     font-weight: 200;
 `;
 
-const Hr = styled.hr`
-    background-color: #eee;
-    border: none;
-    height: 1px;
-`;
-
 const Summary = styled.div`
     flex: 1;
     border: 0.5px solid lightgrey;
@@ -161,11 +151,14 @@ const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
 const SummaryButton = styled.button`
-    width: 100%;
     padding: 1rem;
-    background-color: black;
-    color: white;
     font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    color: white;
+    background-color: black;
 `;
 
 const Cart = () => {
@@ -188,20 +181,16 @@ const Cart = () => {
         };
         stripeToken && makeRequest();
     }, [stripeToken, cart.total, navigate]);
+
     return (
         <Container>
             <Navbar />
-            <Annoucement />
             <Wrapper>
                 <Title>{"Your Cart"}</Title>
                 <Top>
                     <Link to="/products">
                         <TopButton>{"Continue Shopping"}</TopButton>
                     </Link>
-                    <TopTexts>
-                        <TopText>{"Shopping Bag (2)"}</TopText>
-                        <TopText>{"Your Wishlist"}</TopText>
-                    </TopTexts>
                     <StripeCheckout
                         name="Dust-N-Skullz"
                         image="https://avatars.githubusercontent.com/u/43953529?v=4"
@@ -220,47 +209,52 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        {cart.products.map((product) => (
-                            <Product key={product._id}>
-                                <ProductDetail>
-                                    <Image src={product.img} />
-                                    <Details>
-                                        <ProductName>
-                                            <b>{"Product :"}</b>
-                                            {product.title}
-                                        </ProductName>
-                                        <ProductID>
-                                            <b>{"ID :"}</b>
-                                            {product._id}
-                                        </ProductID>
-                                        <ProductColor
-                                            color={
-                                                product.color
-                                                    ? product.color
-                                                    : "black"
-                                            }
+                        {cart.products.map((product, index) => (
+                            <>
+                                <Product key={product._id}>
+                                    <ProductDetail>
+                                        <Image
+                                            src={`data:image/jpg;base64,${product.img}`}
                                         />
-                                        <ProductSize>
-                                            <b>{"Size :"}</b>
-                                            {product.size ? product.size : " L"}
-                                        </ProductSize>
-                                    </Details>
-                                </ProductDetail>
-                                <PriceDetail>
-                                    <ProductAmountContainer>
-                                        <Add />
-                                        <ProductAmount>
-                                            {product.quantity}
-                                        </ProductAmount>
-                                        <Remove />
-                                    </ProductAmountContainer>
-                                    <ProductPrice>{`${
-                                        product.price * product.quantity
-                                    }€`}</ProductPrice>
-                                </PriceDetail>
-                            </Product>
+                                        <Details>
+                                            <ProductName>
+                                                <b>{"Product :"}</b>
+                                                {product.title}
+                                            </ProductName>
+                                            <ProductID>
+                                                <b>{"ID :"}</b>
+                                                {product._id}
+                                            </ProductID>
+                                            <ProductColor
+                                                color={
+                                                    product.color
+                                                        ? product.color
+                                                        : "black"
+                                                }
+                                            />
+                                            <ProductSize>
+                                                <b>{"Size :"}</b>
+                                                {product.size
+                                                    ? product.size
+                                                    : " L"}
+                                            </ProductSize>
+                                        </Details>
+                                    </ProductDetail>
+                                    <PriceDetail>
+                                        <ProductAmountContainer>
+                                            <Add />
+                                            <ProductAmount>
+                                                {product.quantity}
+                                            </ProductAmount>
+                                            <Remove />
+                                        </ProductAmountContainer>
+                                        <ProductPrice>{`${
+                                            product.price * product.quantity
+                                        }€`}</ProductPrice>
+                                    </PriceDetail>
+                                </Product>
+                            </>
                         ))}
-                        <Hr />
                     </Info>
                     <Summary>
                         <SummaryTitle>{"ORDER SUMMARY"}</SummaryTitle>

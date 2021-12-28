@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
     height: 30px;
-    background-color: teal;
+    background-color: black;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 600;
 `;
 
 const Annoucement = () => (

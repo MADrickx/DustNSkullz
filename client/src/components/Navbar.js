@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SearchIcon from "@mui/icons-material/Search";
+import logo from "../img/logo.png";
 import Badge from "@mui/material/Badge";
 import {ShoppingCartOutlined} from "@material-ui/icons";
 import {mobile} from "../responsive";
@@ -9,13 +9,12 @@ import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../redux/apiCalls";
 import {useDispatch} from "react-redux";
 const Container = styled.div`
-    height: 60px;
-    padding: 1rem 0;
-    ${mobile({height: "50px"})}
+    padding-bottom: 2.5rem;
+    background-color: #111110;
 `;
 
 const Wrapper = styled.div`
-    padding: 1rem 2rem;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,38 +22,17 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex: 3;
+    margin: 0 1rem;
+    padding: 1rem 0 1rem 1rem;
+    border-bottom: 1px solid #8b0000;
 `;
 
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+    color: white;
     ${mobile({display: "none"})};
-`;
-
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgrey;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    position: relative;
-`;
-
-const Input = styled.input`
-    border: none;
-    ${mobile({width: "0"})};
-    &:focus {
-        ${mobile({
-            position: "absolute",
-            left: 0,
-            transition: ".3s ease-in",
-            width: "100px",
-        })};
-    }
 `;
 
 const Center = styled.div`
@@ -62,17 +40,20 @@ const Center = styled.div`
     text-align: center;
 `;
 
-const Logo = styled.h1`
-    font-weight: bold;
-    ${mobile({fontSize: "1.5rem"})};
+const Logo = styled.img`
+    width: 150px;
+    min-width: 50px;
+    filter: grayscale(1) invert(1);
 `;
 
 const Right = styled.div`
-    flex: 1;
+    flex: 3;
+    padding: 1rem 0;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    border-bottom: 1px solid #8b0000;
     ${mobile({flex: 3, justifyContent: "center"})};
 `;
 
@@ -85,14 +66,14 @@ const MenuItem = styled.div`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    color: black;
+    color: white;
     &:focus,
     &:hover,
     &:visited,
     &:link,
     &:active {
         text-decoration: none;
-        color: black;
+        color: white;
     }
 `;
 
@@ -110,14 +91,10 @@ const Navbar = () => {
             <Wrapper>
                 <Left>
                     <Language>{"EN"}</Language>
-                    <SearchContainer>
-                        <Input style={{color: "grey", fontSize: 16}} />
-                        <SearchIcon />
-                    </SearchContainer>
                 </Left>
                 <Center>
                     <StyledLink to="/">
-                        <Logo>{"DustNskullz"}</Logo>
+                        <Logo src={logo} />
                     </StyledLink>
                 </Center>
                 <Right>
@@ -141,7 +118,7 @@ const Navbar = () => {
                     )}
                     <StyledLink to={"/cart"}>
                         <MenuItem>
-                            <Badge badgeContent={quantity} color={"primary"}>
+                            <Badge badgeContent={quantity} color={"secondary"}>
                                 <ShoppingCartOutlined color={"action"} />
                             </Badge>
                         </MenuItem>

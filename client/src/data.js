@@ -22,6 +22,7 @@ import Profilskull from "./img/T-shirt---Maan---Profilskull.jpg";
 import Skull from "./img/T-shirt---Maan---Skull.jpg";
 import Spades from "./img/T-shirt---Maan---Spades.jpg";
 import Westerner from "./img/T-shirt---Maan---Westerner.jpg";
+import ap from "./img/ap.jpg";
 
 export const sliderItems = [
     {
@@ -29,36 +30,36 @@ export const sliderItems = [
         img: "https://robohash.org/138.246.253.15.png",
         title: "New t-shirts incoming !",
         desc: "Discover our new line of t-shirt designed by Maan and Alain Poncelet",
-        bg: "17a589",
+        bg: "111110",
     },
     {
         id: 2,
         img: "https://robohash.org/138.246.253.15.png",
         title: "Check our new stock !",
         desc: "A lot of design, a lot of frabrics, a lot of sizes",
-        bg: "ba4a00",
+        bg: "111110",
     },
     {
         id: 3,
         img: "https://robohash.org/138.246.253.15.png",
         title: "New t-shirts incoming !",
         desc: "Discover our new line of t-shirt designed by Maan and Alain Poncelet",
-        bg: "6c3483",
+        bg: "111110",
     },
 ];
 
 export const categories = [
     {
         id: 1,
-        img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-        title: "Alain Poncelet's t-shirts",
+        img: {src: ap},
+        title: "Shop Alain Poncelet's t-shirts",
         cat: "t-shirt",
         author: "alain",
     },
     {
         id: 2,
         img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-        title: "Maan's t-shirts",
+        title: "Shop Maan's t-shirts",
         cat: "t-shirt",
         author: "maan",
     },

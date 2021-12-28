@@ -12,9 +12,12 @@ import {
 } from "@material-ui/icons";
 import {mobile} from "../responsive";
 import {Link} from "react-router-dom";
+
 const Container = styled.div`
+    border-top: 1px solid grey;
     display: flex;
     justify-content: space-between;
+    background-color: #111111;
     ${mobile({flexDirection: "column"})};
 `;
 
@@ -43,6 +46,7 @@ const Right = styled.div`
 const Title = styled.h3`
     margin-bottom: 2rem;
     text-align: center;
+    color: white;
 `;
 
 const List = styled.ul`
@@ -56,14 +60,17 @@ const List = styled.ul`
 const ListItem = styled.li`
     margin: 0 0 0.5rem 0;
     padding: 0;
+    color: white;
 `;
 
 const Logo = styled.h1`
     position: static;
+    color: white;
 `;
 
 const Description = styled.p`
     position: static;
+    color: white;
 `;
 const SocialContainer = styled.div`
     display: flex;
@@ -84,6 +91,7 @@ const ContactItem = styled.div`
     width: 50%;
     display: flex;
     margin: 0 0.5rem 0.5rem 0.5rem;
+    color: white;
     & > svg {
         width: 1rem;
         height: 1rem;
@@ -95,6 +103,7 @@ const PaymentContainer = styled.div`
     flex-direction: row;
     align-items: center;
     width: 50%;
+    color: white;
 `;
 
 const PaymentItem = styled.div`

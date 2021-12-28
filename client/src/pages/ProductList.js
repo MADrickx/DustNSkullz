@@ -10,10 +10,12 @@ import {useLocation} from "react-router-dom";
 
 const Container = styled.div`
     padding: 0rem;
+    background-color: #111110;
 `;
 
 const Title = styled.h1`
     padding: 0rem;
+    color: white;
     margin: 1rem;
 `;
 
@@ -23,6 +25,7 @@ const FilterContainter = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
+    color: white;
 `;
 
 const Filter = styled.div`
@@ -65,7 +68,6 @@ const ProductList = () => {
     return (
         <Container>
             <Navbar />
-            <Annoucement />
             <Title>{author ? `${author}'s T-shirts` : `All T-shirts`}</Title>
             <FilterContainter>
                 <Filter>
@@ -95,7 +97,6 @@ const ProductList = () => {
                 </Filter>
             </FilterContainter>
             <Products author={author} filters={filters} sort={sort} />
-            <Newsletter />
             <Footer />
         </Container>
     );

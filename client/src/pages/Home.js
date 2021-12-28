@@ -1,21 +1,23 @@
 import React from "react";
-import Annoucement from "../components/Annoucement";
 import Categories from "../components/Categories";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
 import Footer from "../components/Footer";
+import styled from "styled-components";
+
+const Container = styled.div`
+    background-color: #1f1f1f;
+`;
+
 const Home = () => (
-    <>
-        <Annoucement />
+    <Container>
         <Navbar />
         <Slider />
         <Categories />
         <Products />
-        <Newsletter />
         <Footer />
-    </>
+    </Container>
 );
 
 export default Home;

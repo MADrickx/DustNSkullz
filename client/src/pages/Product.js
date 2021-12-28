@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Annoucement from "../components/Annoucement";
-import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import {Remove, Add} from "@material-ui/icons";
 import {mobile} from "../responsive";
@@ -13,11 +11,13 @@ import {useDispatch} from "react-redux";
 
 const Container = styled.div`
     padding: 0rem;
+    background-color: #111110;
 `;
 
 const Wrapper = styled.div`
-    padding: 1rem;
+    padding: 2rem;
     display: flex;
+    background-color: #111110;
     ${mobile({flexDirection: "column"})};
 `;
 
@@ -27,11 +27,13 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
     width: 100%;
+    border-radius: 5px;
 `;
 
 const InfoContainer = styled.div`
     flex: 1;
     padding: 0 3rem;
+    color: white;
     ${mobile({padding: "1rem"})};
 `;
 
@@ -117,10 +119,6 @@ const Button = styled.button`
     border-radius: 5px;
     height: 50px;
     padding: 0 1rem;
-    box-shadow: 6px 6px 8px rgba(255, 255, 255, 0.075),
-        6px 6px 10px rgba(0, 0, 0, 0.15),
-        -6px -6px 14px rgba(255, 255, 255, 0.7),
-        -6px -6px 10px rgba(255, 255, 255, 0.5);
 `;
 
 const Product = () => {
@@ -162,7 +160,6 @@ const Product = () => {
     return (
         <Container>
             <Navbar />
-            <Annoucement />
             <Wrapper>
                 <ImageContainer>
                     <Image src={`data:image/jpg;base64,${product.img}`} />
@@ -208,7 +205,6 @@ const Product = () => {
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
-            <Newsletter />
             <Footer />
         </Container>
     );

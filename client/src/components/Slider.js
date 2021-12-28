@@ -6,10 +6,11 @@ import {mobile} from "../responsive";
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     position: relative;
     overflow: hidden;
+    box-shadow: 0px 0px 15px 0px #111111;
     ${mobile({display: "none"})};
 `;
 
@@ -24,8 +25,8 @@ const Arrow = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
-    left: ${props => props.direction === "left" && "10px"};
-    right: ${props => props.direction === "right" && "10px"};
+    left: ${(props) => props.direction === "left" && "10px"};
+    right: ${(props) => props.direction === "right" && "10px"};
     margin: auto;
     cursor: pointer;
     opacity: 0.5;
@@ -36,7 +37,7 @@ const Wrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: row;
-    transform: translateX(${props => props.slideIndex * -100}vw);
+    transform: translateX(${(props) => props.slideIndex * -100}vw);
     transition: all 0.5s ease-in-out;
 `;
 
@@ -44,16 +45,17 @@ const Slide = styled.div`
     display: flex;
     align-items: center;
     width: 100vw;
-    height: 100vh;
     justify-content: center;
-    background-color: #${props => props.bg};
+    background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
     box-sizing: border-box;
     padding: 1rem;
-    height: 100%;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Img = styled.img`
@@ -71,6 +73,7 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
     font-size: 4rem;
+    color: white;
 `;
 
 const Desc = styled.p`
@@ -78,11 +81,12 @@ const Desc = styled.p`
     font-size: 2rem;
     font-weight: 500;
     letter-spacing: 3px;
+    color: white;
 `;
 
 const Button = styled.button`
     padding: 10px;
-    background-color: teal;
+    background-color: #8b0000;
     color: white;
     border: none;
     border-radius: 5px;
@@ -90,9 +94,23 @@ const Button = styled.button`
     width: 100px;
 `;
 
+const ImgCanvas = styled.div`
+    width: 70%;
+    height: 500px;
+    border-radius: 5px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const InfoCanvas = styled.div`
+    width: 70%;
+`;
+
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
-    const handleClick = direction => {
+    const handleClick = (direction) => {
         if (direction === "left") {
             setSlideIndex(
                 slideIndex < sliderItems.length && slideIndex > 0
@@ -112,15 +130,19 @@ const Slider = () => {
                 <ArrowLeftOutlined />
             </Arrow>
             <Wrapper slideIndex={slideIndex}>
-                {sliderItems.map(item => (
+                {sliderItems.map((item) => (
                     <Slide bg={item.bg} key={item.id}>
                         <ImgContainer>
-                            <Img src={item.img} />
+                            <ImgCanvas>
+                                <Img src={item.img} />
+                            </ImgCanvas>
                         </ImgContainer>
                         <InfoContainer>
-                            <Title>{item.title}</Title>
-                            <Desc>{item.desc}</Desc>
-                            <Button>{"Shop Now"}</Button>
+                            <InfoCanvas>
+                                <Title>{item.title}</Title>
+                                <Desc>{item.desc}</Desc>
+                                <Button>{"Shop Now"}</Button>
+                            </InfoCanvas>
                         </InfoContainer>
                     </Slide>
                 ))}

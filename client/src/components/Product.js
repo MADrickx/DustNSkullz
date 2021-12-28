@@ -1,41 +1,49 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    ShoppingCartOutlined,
-    SearchOutlined,
-    FavoriteBorderOutlined,
-} from "@material-ui/icons";
-import {Link} from "react-router-dom";
+import {ShoppingCartOutlined, SearchOutlined} from "@material-ui/icons";
+import {Link, useNavigate} from "react-router-dom";
+
+const ImageContainer = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease-in-out;
+    transform: translate(30%);
+`;
+
+const SpecContainer = styled.div`
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+`;
 
 const Container = styled.div`
     flex: 1;
-    margin: 0.5rem;
+    margin: 0 1rem 1rem 1rem;
     min-width: 280px;
     height: 350px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     transition: 0.2s ease-in-out;
     position: relative;
+    background-color: #fff;
     border-radius: 5px;
-    box-shadow: 6px 6px 8px rgba(255, 255, 255, 0.075),
-        6px 6px 10px rgba(0, 0, 0, 0.15),
-        -6px -6px 14px rgba(255, 255, 255, 0.7),
-        -6px -6px 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 15px 15px 46px #181818, -15px -15px 46px #202020;
+
+    &:hover ${ImageContainer} {
+        transform: translate(-20%);
+        transition: 0.5s ease-in-out;
+    }
+
+    &:hover ${SpecContainer} {
+        opacity: 1;
+        transition: 0.5s ease-in-out;
+    }
 `;
 
-const Circle = styled.div`
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-`;
-const Image = styled.img`
-    height: 75%;
-    z-index: 2;
-`;
 const Info = styled.div`
     opacity: 0;
     position: absolute;
@@ -44,7 +52,6 @@ const Info = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
     z-index: 3;
     display: flex;
     align-items: center;
@@ -55,11 +62,17 @@ const Info = styled.div`
         cursor: pointer;
     }
 `;
+
+const Image = styled.img`
+    width: 70%;
+    z-index: 2;
+`;
+
 const Icons = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #1f1f1f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,8 +80,8 @@ const Icons = styled.div`
     transition: all 0.2s ease;
     cursor: pointer;
     &:hover {
-        background-color: red;
-        color: black;
+        background-color: #8b0000;
+        color: white;
         transform: scale(1.1);
     }
 `;
@@ -85,38 +98,55 @@ const StyledLink = styled(Link)`
     &:link,
     &:active {
         text-decoration: none;
-        color: black;
+        color: white;
     }
 `;
-const General = styled.div`
-    width: 150px;
-    display: flex;
-    justify-content: space-between;
+
+const GeneralInfo = styled.div`
+    margin: 0.5rem 0;
 `;
-const GeneralInfo = styled.div``;
-const Product = ({item}) => (
-    <>
-        <Container>
-            <Circle />
-            <Image src={`data:image/jpg;base64,${item.img}`} />
-            <Info>
-                <Icons>
-                    <ShoppingCartOutlined />
-                </Icons>
-                <Icons>
-                    <StyledLink to={`/product/${item._id}`}>
-                        <SearchOutlined />
-                    </StyledLink>
-                </Icons>
-                <Icons>
-                    <FavoriteBorderOutlined />
-                </Icons>
-            </Info>
-            <General>
-                <GeneralInfo>{item.title}</GeneralInfo>
-                <GeneralInfo>{`${item.price}€`}</GeneralInfo>
-            </General>
-        </Container>
-    </>
-);
+
+const Button = styled.button`
+    margin-top: 1rem;
+    padding: 10px;
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+`;
+
+const Product = ({item}) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/product/${item._id}`);
+    };
+    return (
+        <>
+            <Container>
+                <ImageContainer>
+                    <Image src={`data:image/jpg;base64,${item.img}`} />
+                    <Info>
+                        <Icons>
+                            <StyledLink to={`/product/${item._id}`}>
+                                <SearchOutlined />
+                            </StyledLink>
+                        </Icons>
+                    </Info>
+                </ImageContainer>
+                <SpecContainer>
+                    <GeneralInfo>
+                        <h2>{item.title}</h2>
+                    </GeneralInfo>
+                    <GeneralInfo>{`${item.price}€`}</GeneralInfo>
+                    <GeneralInfo>{`${item.desc}`}</GeneralInfo>
+                    <GeneralInfo>{`By ${item.author}`}</GeneralInfo>
+                    <Button onClick={handleClick}>Look at me</Button>
+                </SpecContainer>
+            </Container>
+        </>
+    );
+};
 export default Product;
