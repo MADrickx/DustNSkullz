@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Annoucement from "../components/Annoucement";
+
 import Products from "../components/Products";
-import Newsletter from "../components/Newsletter";
+
 import Footer from "../components/Footer";
 import {mobile} from "../responsive";
 import {useLocation} from "react-router-dom";

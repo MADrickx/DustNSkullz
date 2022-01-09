@@ -1,6 +1,5 @@
 /* eslint-disable no-confusing-arrow */
 import React, {useState, useEffect} from "react";
-import Annoucement from "../components/Annoucement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";

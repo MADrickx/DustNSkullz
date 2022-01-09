@@ -38,21 +38,28 @@ const StyledLink = styled(Link)`
     }
 `;
 
-const Title = styled.span`
+const Title = styled.button`
     color: white;
     margin-bottom: 1rem;
+    padding: 1rem;
     text-align: center;
+    background-color: #8b0000;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
 `;
 
 const EffectWrapper = styled.div`
     width: 100%;
-    height: 70vh;
+    height: 100%;
     position: absolute;
+    border-radius: 5px;
     background: rgb(0, 0, 0);
     background: linear-gradient(
         0deg,
         rgba(0, 0, 0, 1) 10%,
-        rgba(142, 40, 40, 0) 40%
+        rgba(142, 40, 40, 0) 50%
     );
 `;
 

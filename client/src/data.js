@@ -27,7 +27,7 @@ import ap from "./img/ap.jpg";
 export const sliderItems = [
     {
         id: 1,
-        img: "https://robohash.org/138.246.253.15.png",
+        img: Tears,
         title: "New t-shirts incoming !",
         desc: "Discover our new line of t-shirt designed by Maan and Alain Poncelet",
         bg: "111110",
