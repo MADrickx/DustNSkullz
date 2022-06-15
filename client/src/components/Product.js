@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {ShoppingCartOutlined, SearchOutlined} from "@material-ui/icons";
+import {SearchOutlined} from "@material-ui/icons";
 import {Link, useNavigate} from "react-router-dom";
+import {mobile} from "../responsive";
 
 const ImageContainer = styled.div`
     width: 50%;
@@ -10,19 +11,29 @@ const ImageContainer = styled.div`
     justify-content: center;
     align-items: center;
     transition: 0.5s ease-in-out;
-    transform: translate(30%);
+    transform: translate(50%);
+    ${mobile({width: "40%", transform: "none"})};
 `;
 
 const SpecContainer = styled.div`
+    width: 50%;
     opacity: 0;
     transition: 0.5s ease-in-out;
+    margin: 1rem 0;
+    ${mobile({
+        opacity: "1",
+        boxSize: "border-box",
+        paddingLeft: "1rem",
+        width: "40%",
+    })};
 `;
 
 const Container = styled.div`
     flex: 1;
-    margin: 0 1rem 1rem 1rem;
+    margin: 1rem;
     min-width: 280px;
-    height: 350px;
+    flex-basis: 40%;
+    max-width: 47%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,16 +43,38 @@ const Container = styled.div`
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 15px 15px 46px #181818, -15px -15px 46px #202020;
+    &:first-child {
+        margin-top: -1rem;
+        ${mobile({
+            margin: "1rem 0",
+        })};
+    }
+
+    &:nth-child(2) {
+        margin-top: -1rem;
+        ${mobile({
+            margin: "1rem 0",
+        })};
+    }
 
     &:hover ${ImageContainer} {
-        transform: translate(-20%);
+        transform: translate(0%);
         transition: 0.5s ease-in-out;
+        ${mobile({
+            transform: "translate(10%)",
+        })};
     }
 
     &:hover ${SpecContainer} {
         opacity: 1;
         transition: 0.5s ease-in-out;
     }
+
+    ${mobile({
+        maxWidth: "100%",
+        justifyContent: "space-around",
+        margin: "1rem 0",
+    })};
 `;
 
 const Info = styled.div`
@@ -64,7 +97,7 @@ const Info = styled.div`
 `;
 
 const Image = styled.img`
-    width: 70%;
+    width: 95%;
     z-index: 2;
 `;
 
@@ -103,11 +136,18 @@ const StyledLink = styled(Link)`
 `;
 
 const GeneralInfo = styled.div`
-    margin: 0.5rem 0;
+    margin: 0.5rem 1rem 0.5rem 2rem;
+    font-size: 1.1rem;
+    ${mobile({margin: "0.5rem 1rem"})};
+`;
+
+const GeneralInfoPrice = styled.div`
+    margin: 0.5rem 1rem 0.5rem 2rem;
+    font-size: 1.3rem;
+    ${mobile({margin: "0.5rem 1rem"})};
 `;
 
 const Button = styled.button`
-    margin-top: 1rem;
     padding: 10px;
     background-color: #8b0000;
     color: white;
@@ -115,6 +155,8 @@ const Button = styled.button`
     border-radius: 5px;
     cursor: pointer;
     width: 100px;
+    margin: 0.5rem 1rem 0.5rem 2rem;
+    ${mobile({margin: "0.5rem 1rem"})};
 `;
 
 const Product = ({item}) => {
@@ -140,7 +182,7 @@ const Product = ({item}) => {
                     <GeneralInfo>
                         <h2>{item.title}</h2>
                     </GeneralInfo>
-                    <GeneralInfo>{`${item.price}€`}</GeneralInfo>
+                    <GeneralInfoPrice>{`${item.price}€`}</GeneralInfoPrice>
                     <GeneralInfo>{`${item.desc}`}</GeneralInfo>
                     <GeneralInfo>{`By ${item.author}`}</GeneralInfo>
                     <Button onClick={handleClick}>Look at me</Button>

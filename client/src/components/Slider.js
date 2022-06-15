@@ -59,7 +59,9 @@ const ImgContainer = styled.div`
 `;
 
 const Img = styled.img`
-    height: 80%;
+    width: 100%;
+    border-radius: 5px;
+    mix-blend-mode: darken;
 `;
 
 const InfoContainer = styled.div`
@@ -98,7 +100,6 @@ const ImgCanvas = styled.div`
     width: 70%;
     height: 500px;
     border-radius: 5px;
-    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -28,7 +28,7 @@ import maan from "./img/maan.jpg";
 export const sliderItems = [
     {
         id: 1,
-        img: Skull,
+        img: Tears,
         title: "New t-shirts incoming !",
         desc: "Discover our new line of t-shirt designed by Maan and Alain Poncelet",
         bg: "111110",
