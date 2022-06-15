@@ -22,6 +22,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req,res)=>{
         {
             title,desc,img,categories,size,color,price,author,inStock
         });
+ 
     res.status(200).json(updatedProduct);
     
    } catch(err) {
