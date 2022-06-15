@@ -18,6 +18,7 @@ export default function Product() {
     const [newImg, setNewImg] = useState();
     const [inputs, setInputs] = useState({});
     const [product, setProduct] = useState({});
+    const [np, setNp] = useState({});
     const dispatch = useDispatch();
 
     const oldProduct = useSelector((state) =>
@@ -91,7 +92,6 @@ export default function Product() {
         });
         console.log(inputs);
     };
-
     const handleClick = (e) => {
         e.preventDefault();
         const newProduct = {
@@ -104,6 +104,7 @@ export default function Product() {
             img: newImg ? newImg : undefined,
         };
         updateProduct(productId, {...oldProduct, ...newProduct}, dispatch);
+        setNp(newProduct);
     };
     return (
         <>
@@ -128,7 +129,7 @@ export default function Product() {
                         <div className="productTopRight">
                             <div className="productInfoTop">
                                 <img
-                                    src={`data:image/png;base64,${product?.img}`}
+                                    src={`data:image/png;base64,${np.img? np.img : product.img}`}
                                     alt=""
                                     className="productInfoImg"
                                 />
@@ -148,7 +149,7 @@ export default function Product() {
                                         price:
                                     </span>
                                     <span className="productInfoValue">
-                                        {product?.price}€
+                                        {np?np.price:product.price}€
                                     </span>
                                 </div>
                                 <div className="productInfoItem">
@@ -156,7 +157,7 @@ export default function Product() {
                                         in stock:
                                     </span>
                                     <span className="productInfoValue">
-                                        {product?.inStock}
+                                        {np?np.inStock:product}
                                     </span>
                                 </div>
                             </div>

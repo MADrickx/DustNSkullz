@@ -23,11 +23,12 @@ import Skull from "./img/T-shirt---Maan---Skull.jpg";
 import Spades from "./img/T-shirt---Maan---Spades.jpg";
 import Westerner from "./img/T-shirt---Maan---Westerner.jpg";
 import ap from "./img/ap.jpg";
+import maan from "./img/maan.jpg";
 
 export const sliderItems = [
     {
         id: 1,
-        img: "https://robohash.org/138.246.253.15.png",
+        img: Skull,
         title: "New t-shirts incoming !",
         desc: "Discover our new line of t-shirt designed by Maan and Alain Poncelet",
         bg: "111110",
@@ -58,7 +59,7 @@ export const categories = [
     },
     {
         id: 2,
-        img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
+        img: {src: maan},
         title: "Shop Maan's t-shirts",
         cat: "t-shirt",
         author: "maan",

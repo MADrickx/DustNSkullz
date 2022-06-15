@@ -13,7 +13,7 @@ const Container = styled.div`
 const Home = () => (
     <Container>
         <Navbar />
-        <Slider />
+        {/* <Slider /> */}
         <Categories />
         <Products />
         <Footer />
