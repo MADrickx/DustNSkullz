@@ -6,7 +6,6 @@ const {verifyTokenAndAuthorized, verifyTokenAndAdmin} = require("./verifyToken")
 router.post("/", verifyTokenAndAdmin, async (req,res)=>{
     const newProduct = new Product(req.body)
     try{
-        console.log(req.body)
         const savedProduct = await newProduct.save();
         res.status(200).json(savedProduct);
     }catch(err){
@@ -23,7 +22,6 @@ router.put("/:id", verifyTokenAndAdmin, async (req,res)=>{
         {
             title,desc,img,categories,size,color,price,author,inStock
         });
-        console.log(req.body)
     res.status(200).json(updatedProduct);
     
    } catch(err) {
@@ -68,7 +66,6 @@ router.get("/", async (req,res)=>{
             }});
         } else if (qAuthor){
             products = await Product.find({ author: { $in: [ qAuthor ] } });
-            console.log(qAuthor);
         }
         
         else {
